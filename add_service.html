@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اضافه کردن خدمت‌گذاری - سامانه مدیریت مراسم غدیر</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>اضافه کردن خدمت‌گذاری کلاس</h1>
+            <div class="logo">
+                <img src="logo.png" alt="لوگوی غدیر" id="logo-img">
+            </div>
+        </header>
+        
+        <main>
+            <div class="form-container">
+                <form id="serviceForm">
+                    <div class="form-group">
+                        <label for="className">نام کلاس:</label>
+                        <input type="text" id="className" name="className" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teacherName">نام معلم:</label>
+                        <input type="text" id="teacherName" name="teacherName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="studentCount">تعداد دانش‌آموزان:</label>
+                        <input type="number" id="studentCount" name="studentCount" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceType">نوع خدمت:</label>
+                        <select id="serviceType" name="serviceType" required onchange="toggleExtraFields()">
+                            <option value="">انتخاب کنید</option>
+                            <option value="جشن">جشن</option>
+                            <option value="سرود">سرود</option>
+                            <option value="اطعام">اطعام</option>
+                            <option value="پک همسایه">پک همسایه</option>
+                            <option value="برنامه فرهنگی">برنامه فرهنگی</option>
+                            <option value="تزئینات">تزئینات</option>
+                            <option value="مسابقه">مسابقه</option>
+                            <option value="سایر">سایر</option>
+                        </select>
+                    </div>
+                    
+                    <!-- فیلدهای اضافی برای انواع خدمت -->
+                    <div id="extraFields" style="display:none;">
+                        <!-- فیلدهای مربوط به سرود -->
+                        <div id="choirFields" class="extra-service-fields">
+                            <div class="form-group">
+                                <label for="performedEvents">جشن‌های اجرا شده:</label>
+                                <div id="eventsContainer">
+                                    <div class="event-item">
+                                        <select class="event-select">
+                                            <option value="">انتخاب جشن</option>
+                                            <!-- گزینه‌ها با جاوااسکریپت پر می‌شود -->
+                                        </select>
+                                        <button type="button" class="small-btn add-event-btn">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- فیلدهای مربوط به اطعام -->
+                        <div id="foodFields" class="extra-service-fields">
+                            <div class="form-group">
+                                <label for="feedCount">تعداد افراد اطعام شده:</label>
+                                <input type="number" id="feedCount" name="feedCount" min="1">
+                            </div>
+                        </div>
+                        
+                        <!-- فیلدهای مربوط به پک همسایه -->
+                        <div id="packageFields" class="extra-service-fields">
+                            <div class="form-group">
+                                <label for="packageCount">تعداد پک‌های توزیع شده:</label>
+                                <input type="number" id="packageCount" name="packageCount" min="1">
+                            </div>
+                        </div>
+                        
+                        <!-- فیلدهای مربوط به جشن -->
+                        <div id="eventFields" class="extra-service-fields">
+                            <div class="form-group">
+                                <label for="guestCount">تعداد مهمان‌ها:</label>
+                                <input type="number" id="guestCount" name="guestCount" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cost">هزینه (تومان):</label>
+                        <input type="number" id="cost" name="cost" min="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">توضیحات:</label>
+                        <textarea id="description" name="description" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cancel" onclick="window.location.href='index.html'">انصراف</button>
+                        <button type="submit" class="submit">ذخیره</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="table-container">
+                <h2>لیست خدمت‌گذاری‌های ثبت شده</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>نام کلاس</th>
+                            <th>نام معلم</th>
+                            <th>تعداد دانش‌آموزان</th>
+                            <th>نوع خدمت</th>
+                            <th>هزینه</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody id="serviceTableBody">
+                        <!-- جدول با جاوااسکریپت پر می‌شود -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        
+        <footer>
+            <p>طراحی شده با ❤️ برای مراسم غدیر</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // به‌روزرسانی جدول در هنگام لود صفحه
+        document.addEventListener('DOMContentLoaded', function() {
+            updateAddServiceTable();
+        });
+    </script>
+</body>
+</html> 
