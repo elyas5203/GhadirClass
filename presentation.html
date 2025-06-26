@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمایش خدمات - سامانه مدیریت مراسم غدیر</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>نمایش خدمات مراسم غدیر</h1>
+            <div class="logo">
+                <img src="logo.png" alt="لوگوی غدیر" id="logo-img">
+            </div>
+        </header>
+        
+        <div class="presentation-container">
+            <h1>خلاصه آمار مراسم غدیر</h1>
+            
+            <!-- تب‌های نمایش -->
+            <div class="tabs-container">
+                <div class="tab active" data-target="summaryTab">
+                    <i class="fas fa-chart-pie"></i>
+                    خلاصه آمار
+                </div>
+                <div class="tab" data-target="chartsTab">
+                    <i class="fas fa-chart-bar"></i>
+                    نمودارها
+                </div>
+                <div class="tab" data-target="tableTab">
+                    <i class="fas fa-table"></i>
+                    جدول اطلاعات
+                </div>
+            </div>
+            
+            <!-- محتوای تب خلاصه آمار -->
+            <div id="summaryTab" class="tab-content active">
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-school"></i></div>
+                        <div class="number" id="totalClasses">0</div>
+                        <div class="label">تعداد کل کلاس‌ها</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="number" id="totalStudents">0</div>
+                        <div class="label">مجموع دانش‌آموزان</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="number" id="totalCost">0</div>
+                        <div class="label">مجموع هزینه‌ها</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="number" id="totalEvents">0</div>
+                        <div class="label">تعداد جشن‌ها</div>
+                    </div>
+                </div>
+                
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="number" id="totalGuests">0</div>
+                        <div class="label">مجموع مهمان‌ها</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-music"></i></div>
+                        <div class="number" id="totalChoirs">0</div>
+                        <div class="label">تعداد سرودها</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-utensils"></i></div>
+                        <div class="number" id="totalFeeds">0</div>
+                        <div class="label">مجموع افراد اطعام شده</div>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <div class="icon"><i class="fas fa-gift"></i></div>
+                        <div class="number" id="totalPackages">0</div>
+                        <div class="label">مجموع پک‌های توزیع شده</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- محتوای تب نمودارها -->
+            <div id="chartsTab" class="tab-content">
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <canvas id="studentCountChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <canvas id="serviceTypeChart"></canvas>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="extraDataChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- محتوای تب جدول اطلاعات -->
+            <div id="tableTab" class="tab-content">
+                <div class="table-container">
+                    <h2>لیست خدمت‌گذاری‌های ثبت شده</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام کلاس</th>
+                                <th>نام معلم</th>
+                                <th>تعداد دانش‌آموزان</th>
+                                <th>نوع خدمتگذاری</th>
+                                <th>هزینه</th>
+                                <th>جزئیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="servicesTableBody">
+                            <!-- جدول با جاوااسکریپت پر می‌شود -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // مدیریت تب‌ها
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // حذف کلاس active از همه تب‌ها
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+        
+                    // اضافه کردن کلاس active به تب کلیک شده
+                    tab.classList.add('active');
+                    const targetId = tab.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+
+            // دریافت داده‌ها
+            const services = getAllServices();
+            
+            // به‌روزرسانی کارت‌های آماری
+            document.getElementById('totalClasses').textContent = services.length;
+            document.getElementById('totalStudents').textContent = services.reduce((sum, s) => sum + Number(s.studentCount), 0);
+            document.getElementById('totalCost').textContent = new Intl.NumberFormat('fa-IR').format(
+                services.reduce((sum, s) => sum + Number(s.cost), 0)
+            );
+
+            // آمار مربوط به انواع خدمات
+            const events = services.filter(s => s.serviceType === 'جشن');
+            document.getElementById('totalEvents').textContent = events.length;
+            document.getElementById('totalGuests').textContent = events.reduce((sum, s) => sum + Number(s.guestCount || 0), 0);
+            
+            document.getElementById('totalChoirs').textContent = services.filter(s => s.serviceType === 'سرود').length;
+            document.getElementById('totalFeeds').textContent = services.filter(s => s.serviceType === 'اطعام')
+                .reduce((sum, s) => sum + Number(s.feedCount || 0), 0);
+            document.getElementById('totalPackages').textContent = services.filter(s => s.serviceType === 'پک همسایه')
+                .reduce((sum, s) => sum + Number(s.packageCount || 0), 0);
+            
+            // به‌روزرسانی جدول
+            const tableBody = document.getElementById('servicesTableBody');
+            if (tableBody) {
+                services.forEach((service, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${service.className}</td>
+                        <td>${service.teacherName}</td>
+                        <td>${service.studentCount}</td>
+                        <td>${service.serviceType}</td>
+                        <td>${new Intl.NumberFormat('fa-IR').format(service.cost)} تومان</td>
+                        <td>${getServiceDetails(service)}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // رسم نمودارها
+            if (services.length > 0) {
+                // نمودار تعداد دانش‌آموزان
+                new Chart(document.getElementById('studentCountChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: services.map(s => s.className),
+                        datasets: [{
+                            label: 'تعداد دانش‌آموزان',
+                            data: services.map(s => s.studentCount),
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'تعداد دانش‌آموزان هر کلاس'
+                            }
+                        }
+                    }
+                });
+                
+                // نمودار هزینه‌ها
+                new Chart(document.getElementById('costChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: services.map(s => s.className),
+                        datasets: [{
+                            data: services.map(s => s.cost),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'توزیع هزینه‌ها'
+                            }
+                        }
+                    }
+                });
+
+                // نمودار نوع خدمات
+                const serviceTypes = {};
+                services.forEach(s => {
+                    serviceTypes[s.serviceType] = (serviceTypes[s.serviceType] || 0) + 1;
+                });
+
+                new Chart(document.getElementById('serviceTypeChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(serviceTypes),
+                        datasets: [{
+                            data: Object.values(serviceTypes),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'توزیع انواع خدمات'
+                            }
+                        }
+                    }
+                });
+                
+                // نمودار اطلاعات اضافی
+                new Chart(document.getElementById('extraDataChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: services.map(s => s.className),
+                        datasets: [{
+                            label: 'تعداد مهمان‌ها',
+                            data: services.map(s => s.guestCount || 0),
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                        }, {
+                            label: 'تعداد افراد اطعام شده',
+                            data: services.map(s => s.feedCount || 0),
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                        }, {
+                            label: 'تعداد پک‌ها',
+                            data: services.map(s => s.packageCount || 0),
+                            backgroundColor: 'rgba(255, 206, 86, 0.5)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'اطلاعات تکمیلی'
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        // تابع کمکی برای نمایش جزئیات خدمت
+        function getServiceDetails(service) {
+            switch (service.serviceType) {
+                case 'جشن':
+                    return service.guestCount ? `تعداد مهمان: ${service.guestCount}` : '-';
+                case 'سرود':
+                    return service.performedEvents?.length ? `تعداد اجراها: ${service.performedEvents.length}` : '-';
+                case 'اطعام':
+                    return service.feedCount ? `تعداد اطعام: ${service.feedCount}` : '-';
+                case 'پک همسایه':
+                    return service.packageCount ? `تعداد پک: ${service.packageCount}` : '-';
+                default:
+                    return '-';
+            }
+        }
+    </script>
+</body>
+</html>
