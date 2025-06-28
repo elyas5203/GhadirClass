@@ -1,6 +1,202 @@
 // تنظیمات گوگل شیت
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxE5m4vVlYcmXAcZO7RBaLGEApUUSzUjgZda_UE4TqLcb6s9uqiIFM1kThZVEms8kLB/exec';
 
+// رنگ‌های نمودار
+const chartColors = [
+    'rgba(255, 99, 132, 0.7)',   // صورتی
+    'rgba(54, 162, 235, 0.7)',   // آبی
+    'rgba(255, 206, 86, 0.7)',   // زرد
+    'rgba(75, 192, 192, 0.7)',   // فیروزه‌ای
+    'rgba(153, 102, 255, 0.7)',  // بنفش
+    'rgba(255, 159, 64, 0.7)',   // نارنجی
+    'rgba(46, 204, 113, 0.7)',   // سبز
+    'rgba(231, 76, 60, 0.7)',    // قرمز
+    'rgba(52, 152, 219, 0.7)',   // آبی روشن
+    'rgba(155, 89, 182, 0.7)',   // بنفش تیره
+    'rgba(241, 196, 15, 0.7)',   // زرد طلایی
+    'rgba(230, 126, 34, 0.7)',   // نارنجی تیره
+    'rgba(26, 188, 156, 0.7)',   // فیروزه‌ای تیره
+    'rgba(231, 76, 60, 0.7)',    // قرمز روشن
+    'rgba(52, 73, 94, 0.7)',     // آبی تیره
+    'rgba(149, 165, 166, 0.7)'   // خاکستری
+];
+
+// داده‌های ثابت خدمات
+const staticServices = [
+    {
+        id: '1',
+        className: '301',
+        teacherName: 'باقری - ناصری',
+        studentCount: 15,
+        serviceType: 'جشن',
+        guestCount: 30,
+        cost: 10000000,
+        description: ''
+    },
+    {
+        id: '2',
+        className: '401',
+        teacherName: 'اکبری - واحدی - انتظامی',
+        studentCount: 13,
+        serviceType: 'جشن',
+        guestCount: 65,
+        cost: 11000000,
+        description: ''
+    },
+    {
+        id: '3',
+        className: '402',
+        teacherName: 'شمسی - خوشناف',
+        studentCount: 14,
+        serviceType: 'پک همسایه',
+        packageCount: 60,
+        cost: 5000000,
+        description: ''
+    },
+    {
+        id: '4',
+        className: '403',
+        teacherName: 'فاتح منش - عطاران',
+        studentCount: 13,
+        serviceType: 'جشن',
+        guestCount: 45,
+        cost: 12000000,
+        description: ''
+    },
+    {
+        id: '5',
+        className: '404',
+        teacherName: 'راغ - احمدی',
+        studentCount: 15,
+        serviceType: 'جشن',
+        guestCount: 80,
+        cost: 17000000,
+        description: ''
+    },
+    {
+        id: '6',
+        className: '405',
+        teacherName: 'حدادیان - علیزاده',
+        studentCount: 13,
+        serviceType: 'پک همسایه',
+        packageCount: 75,
+        cost: 7000000,
+        description: ''
+    },
+    {
+        id: '7',
+        className: '407',
+        teacherName: 'مبینی - خدابنده',
+        studentCount: 12,
+        serviceType: 'جشن',
+        guestCount: 70,
+        cost: 15000000,
+        description: ''
+    },
+    {
+        id: '8',
+        className: '408',
+        teacherName: 'عطاران - یحیوان',
+        studentCount: 13,
+        serviceType: 'پک همسایه',
+        packageCount: 50,
+        cost: 10000000,
+        description: ''
+    },
+    {
+        id: '9',
+        className: '521',
+        teacherName: 'روشنی - یوزرگی',
+        studentCount: 15,
+        serviceType: 'پک همسایه',
+        packageCount: 75,
+        cost: 6000000,
+        description: ''
+    },
+    {
+        id: '10',
+        className: '522',
+        teacherName: 'مرمری - امیدوار',
+        studentCount: 11,
+        serviceType: 'سرود',
+        performedEvents: [
+            { id: '2', name: '401 - اکبری - واحدی - انتظامی' },
+            { id: '5', name: '404 - راغ - احمدی' }
+        ],
+        cost: 0,
+        description: ''
+    },
+    {
+        id: '11',
+        className: '528',
+        teacherName: 'هاشمی - باقری',
+        studentCount: 14,
+        serviceType: 'جشن',
+        guestCount: 120,
+        cost: 18000000,
+        description: ''
+    },
+    {
+        id: '12',
+        className: '527',
+        teacherName: 'هشکوال - نیک صفت',
+        studentCount: 13,
+        serviceType: 'اطعام',
+        feedCount: 1000,
+        cost: 15000000,
+        description: ''
+    },
+    {
+        id: '13',
+        className: '5210',
+        teacherName: 'فاتح منش - باقر زاده',
+        studentCount: 15,
+        serviceType: 'جشن',
+        guestCount: 55,
+        cost: 14000000,
+        description: ''
+    },
+    {
+        id: '14',
+        className: '629',
+        teacherName: 'میری - نعمایی',
+        studentCount: 14,
+        serviceType: 'جشن',
+        guestCount: 33,
+        cost: 11000000,
+        description: ''
+    },
+    {
+        id: '15',
+        className: '523',
+        teacherName: 'حسینی - فریحی',
+        studentCount: 12,
+        serviceType: 'جشن',
+        guestCount: 40,
+        cost: 10000000,
+        description: ''
+    },
+    {
+        id: '16',
+        className: '5211',
+        teacherName: 'خدادراده - روانسالار - امیرآبادی',
+        studentCount: 10,
+        serviceType: 'سرود',
+        performedEvents: [
+            { id: '15', name: '523 - حسینی - فریحی' },
+            { id: '7', name: '407 - مبینی - خدابنده' },
+            { id: '14', name: '629 - میری - نعمایی' }
+        ],
+        cost: 0,
+        description: ''
+    }
+];
+
+// تابع دریافت همه خدمات
+function getAllServices() {
+    return staticServices;
+}
+
 // تابع ذخیره خدمت جدید
 function saveService(serviceData) {
     try {
@@ -97,16 +293,6 @@ function saveService(serviceData) {
             success: false,
             message: 'خطا در ذخیره اطلاعات'
         };
-    }
-}
-
-// تابع دریافت همه خدمات
-function getAllServices() {
-    try {
-        return JSON.parse(localStorage.getItem('services')) || [];
-    } catch (error) {
-        console.error('Error getting services:', error);
-        return [];
     }
 }
 
@@ -526,4 +712,300 @@ async function initPage() {
 }
 
 // اجرای تابع آماده‌سازی صفحه بعد از بارگذاری کامل
-document.addEventListener('DOMContentLoaded', initPage); 
+document.addEventListener('DOMContentLoaded', initPage);
+
+document.addEventListener('DOMContentLoaded', function() {
+    // مدیریت تب‌ها
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            
+            tab.classList.add('active');
+            const targetId = tab.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
+    // دریافت داده‌ها
+    const services = getAllServices();
+    
+    // به‌روزرسانی کارت‌های آماری
+    document.getElementById('totalClasses').textContent = services.length;
+    document.getElementById('totalStudents').textContent = services.reduce((sum, s) => sum + Number(s.studentCount), 0);
+    document.getElementById('totalCost').textContent = new Intl.NumberFormat('fa-IR').format(
+        services.reduce((sum, s) => sum + Number(s.cost), 0)
+    );
+
+    // آمار مربوط به انواع خدمات
+    const events = services.filter(s => s.serviceType === 'جشن');
+    document.getElementById('totalEvents').textContent = events.length;
+    document.getElementById('totalGuests').textContent = events.reduce((sum, s) => sum + Number(s.guestCount || 0), 0);
+    
+    document.getElementById('totalChoirs').textContent = services.filter(s => s.serviceType === 'سرود').length;
+    document.getElementById('totalFeeds').textContent = services.filter(s => s.serviceType === 'اطعام')
+        .reduce((sum, s) => sum + Number(s.feedCount || 0), 0);
+    document.getElementById('totalPackages').textContent = services.filter(s => s.serviceType === 'پک همسایه')
+        .reduce((sum, s) => sum + Number(s.packageCount || 0), 0);
+
+    // به‌روزرسانی جدول
+    const tableBody = document.getElementById('servicesTableBody');
+    if (tableBody) {
+        services.forEach((service, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${service.className}</td>
+                <td>${service.teacherName}</td>
+                <td>${service.studentCount}</td>
+                <td>${getServiceTypeDisplay(service)}</td>
+                <td class="amount">${new Intl.NumberFormat('fa-IR').format(service.cost)} تومان</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+    
+    // رسم نمودارها
+    if (services.length > 0) {
+        // نمودار تعداد دانش‌آموزان
+        new Chart(document.getElementById('studentCountChart'), {
+            type: 'bar',
+            data: {
+                labels: services.map(s => s.className),
+                datasets: [{
+                    label: 'تعداد دانش‌آموزان',
+                    data: services.map(s => s.studentCount),
+                    backgroundColor: chartColors
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'تعداد دانش‌آموزان هر کلاس',
+                        font: { size: 16 }
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        // نمودار هزینه‌ها
+        new Chart(document.getElementById('costChart'), {
+            type: 'pie',
+            data: {
+                labels: services.map(s => s.className),
+                datasets: [{
+                    data: services.map(s => s.cost),
+                    backgroundColor: chartColors
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'توزیع هزینه‌ها',
+                        font: { size: 16 }
+                    }
+                }
+            }
+        });
+
+        // نمودار نوع خدمات
+        const serviceTypes = {};
+        services.forEach(s => {
+            serviceTypes[s.serviceType] = (serviceTypes[s.serviceType] || 0) + 1;
+        });
+
+        new Chart(document.getElementById('serviceTypeChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(serviceTypes),
+                datasets: [{
+                    data: Object.values(serviceTypes),
+                    backgroundColor: chartColors.slice(0, Object.keys(serviceTypes).length)
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'توزیع انواع خدمات',
+                        font: { size: 16 }
+                    }
+                }
+            }
+        });
+
+        // نمودار تعداد مهمان‌ها
+        new Chart(document.getElementById('guestCountChart'), {
+            type: 'bar',
+            data: {
+                labels: services.filter(s => s.guestCount).map(s => s.className),
+                datasets: [{
+                    label: 'تعداد مهمان‌ها',
+                    data: services.filter(s => s.guestCount).map(s => s.guestCount),
+                    backgroundColor: chartColors
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'تعداد مهمان‌ها در هر جشن',
+                        font: { size: 16 }
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // نمودار هزینه به ازای هر دانش‌آموز
+        new Chart(document.getElementById('costPerStudentChart'), {
+            type: 'bar',
+            data: {
+                labels: services.map(s => `کلاس ${s.className} (${s.teacherName})`),
+                datasets: [{
+                    label: 'هزینه سرانه (تومان)',
+                    data: services.map(s => Math.round(s.cost / s.studentCount)),
+                    backgroundColor: services.map((s, i) => chartColors[i]),
+                    borderColor: services.map((s, i) => chartColors[i].replace('0.7', '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'هزینه سرانه هر دانش‌آموز به تفکیک کلاس',
+                        font: { size: 16 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = context.raw;
+                                const service = services[context.dataIndex];
+                                return [
+                                    `هزینه سرانه: ${new Intl.NumberFormat('fa-IR').format(value)} تومان`,
+                                    `هزینه کل کلاس: ${new Intl.NumberFormat('fa-IR').format(service.cost)} تومان`,
+                                    `تعداد دانش‌آموزان: ${service.studentCount} نفر`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'تومان'
+                        },
+                        ticks: {
+                            callback: function(value) {
+                                return new Intl.NumberFormat('fa-IR').format(value);
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        });
+
+        // نمودار تأثیر خدمات
+        new Chart(document.getElementById('serviceImpactChart'), {
+            type: 'bar',
+            data: {
+                labels: services.map(s => s.className),
+                datasets: [
+                    {
+                        label: 'تعداد مهمان‌ها',
+                        data: services.map(s => s.guestCount || 0),
+                        backgroundColor: chartColors[0],
+                        borderColor: chartColors[0].replace('0.7', '1'),
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'تعداد افراد اطعام شده',
+                        data: services.map(s => s.feedCount || 0),
+                        backgroundColor: chartColors[1],
+                        borderColor: chartColors[1].replace('0.7', '1'),
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'تعداد پک‌های همسایه',
+                        data: services.map(s => s.packageCount || 0),
+                        backgroundColor: chartColors[2],
+                        borderColor: chartColors[2].replace('0.7', '1'),
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'تأثیر خدمات بر جامعه هدف',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'تعداد افراد'
+                        }
+                    }
+                }
+            }
+        });
+    }
+});
+
+// تابع نمایش نوع خدمت
+function getServiceTypeDisplay(service) {
+    switch (service.serviceType) {
+        case 'جشن':
+            return `جشن (تعداد مهمان: ${service.guestCount})`;
+        case 'سرود':
+            if (service.performedEvents && service.performedEvents.length > 0) {
+                return `سرود (${service.performedEvents.map(e => e.name).join('، ')})`;
+            }
+            return 'سرود';
+        case 'اطعام':
+            return `اطعام (تعداد افراد: ${service.feedCount})`;
+        case 'پک همسایه':
+            return `پک همسایه (تعداد پک: ${service.packageCount})`;
+        default:
+            return service.serviceType;
+    }
+} 
