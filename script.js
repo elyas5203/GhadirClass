@@ -46,7 +46,7 @@ const staticServices = [
     {
         id: '3',
         className: '402',
-        teacherName: 'شمسی - خوشناف',
+        teacherName: 'شمسی - خوشباف',
         studentCount: 14,
         serviceType: 'پک همسایه',
         packageCount: 60,
@@ -56,7 +56,7 @@ const staticServices = [
     {
         id: '4',
         className: '403',
-        teacherName: 'فاتح منش - عطاران',
+        teacherName: 'قانع منش - عطاران',
         studentCount: 13,
         serviceType: 'جشن',
         guestCount: 45,
@@ -66,7 +66,7 @@ const staticServices = [
     {
         id: '5',
         className: '404',
-        teacherName: 'راغ - احمدی',
+        teacherName: 'زارع - احمدی',
         studentCount: 15,
         serviceType: 'جشن',
         guestCount: 80,
@@ -86,7 +86,7 @@ const staticServices = [
     {
         id: '7',
         className: '407',
-        teacherName: 'مبینی - خدابنده',
+        teacherName: 'منبتی - خیابانی',
         studentCount: 12,
         serviceType: 'جشن',
         guestCount: 70,
@@ -96,7 +96,7 @@ const staticServices = [
     {
         id: '8',
         className: '408',
-        teacherName: 'عطاران - یحیوان',
+        teacherName: 'عطاران - نجفیان',
         studentCount: 13,
         serviceType: 'پک همسایه',
         packageCount: 50,
@@ -106,7 +106,7 @@ const staticServices = [
     {
         id: '9',
         className: '521',
-        teacherName: 'روشنی - یوزرگی',
+        teacherName: 'روشنی - پورزکی',
         studentCount: 15,
         serviceType: 'پک همسایه',
         packageCount: 75,
@@ -121,7 +121,7 @@ const staticServices = [
         serviceType: 'سرود',
         performedEvents: [
             { id: '2', name: '401 - اکبری - واحدی - انتظامی' },
-            { id: '5', name: '404 - راغ - احمدی' }
+            { id: '5', name: '404 - زارع - احمدی' }
         ],
         cost: 0,
         description: ''
@@ -129,7 +129,7 @@ const staticServices = [
     {
         id: '11',
         className: '528',
-        teacherName: 'هاشمی - باقری',
+        teacherName: 'هاشمی - یاوری',
         studentCount: 14,
         serviceType: 'جشن',
         guestCount: 120,
@@ -139,7 +139,7 @@ const staticServices = [
     {
         id: '12',
         className: '527',
-        teacherName: 'هشکوال - نیک صفت',
+        teacherName: 'هنگوال - نیک صفت',
         studentCount: 13,
         serviceType: 'اطعام',
         feedCount: 1000,
@@ -149,7 +149,7 @@ const staticServices = [
     {
         id: '13',
         className: '5210',
-        teacherName: 'فاتح منش - باقر زاده',
+        teacherName: 'قانع منش - باقر زاده',
         studentCount: 15,
         serviceType: 'جشن',
         guestCount: 55,
@@ -159,7 +159,7 @@ const staticServices = [
     {
         id: '14',
         className: '629',
-        teacherName: 'میری - نعمایی',
+        teacherName: 'میری - نمایی',
         studentCount: 14,
         serviceType: 'جشن',
         guestCount: 33,
@@ -169,7 +169,7 @@ const staticServices = [
     {
         id: '15',
         className: '523',
-        teacherName: 'حسینی - فریحی',
+        teacherName: 'حسینی - فرشچی',
         studentCount: 12,
         serviceType: 'جشن',
         guestCount: 40,
@@ -179,7 +179,7 @@ const staticServices = [
     {
         id: '16',
         className: '5211',
-        teacherName: 'خدادراده - روانسالار - امیرآبادی',
+        teacherName: 'حیدرزاده - روانسالار - امیرآبادی',
         studentCount: 10,
         serviceType: 'سرود',
         performedEvents: [
