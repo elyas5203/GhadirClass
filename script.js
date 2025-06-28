@@ -752,21 +752,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .reduce((sum, s) => sum + Number(s.packageCount || 0), 0);
 
     // به‌روزرسانی جدول
-    const tableBody = document.getElementById('servicesTableBody');
-    if (tableBody) {
-        services.forEach((service, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${service.className}</td>
-                <td>${service.teacherName}</td>
-                <td>${service.studentCount}</td>
-                <td>${getServiceTypeDisplay(service)}</td>
-                <td class="amount">${new Intl.NumberFormat('fa-IR').format(service.cost)} تومان</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    }
+   
     
     // رسم نمودارها
     if (services.length > 0) {
